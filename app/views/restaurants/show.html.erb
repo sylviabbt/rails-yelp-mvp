@@ -1,0 +1,31 @@
+<!-- <h1>Restaurants#show</h1>
+<p>Find me in app/views/restaurants/show.html.erb</p> -->
+<div class="card">
+<h1><%= @restaurant.name %></h1>
+<p><%= @restaurant.address %></p> <p><%= @restaurant.phone_number %></p>
+<p><%= @restaurant.category %></p>
+</div>
+
+<p><% @reviews.each do |t| %></p>
+<div class="card-review">
+   <p><%= t.content %></p>
+   <p><%= t.rating.times do %></p>🥕
+   <% end %>
+</div>
+<% end %>
+
+<div class="container">
+  <%= simple_form_for [@restaurant, @review] do |f| %>
+    <%= f.input :content %>
+    <%= f.input :rating %>
+    <%= f.submit "add a review", class: "btn btn-primary" %>
+  <% end %>
+
+  <p><%= link_to "edit",  edit_restaurant_path(@restaurant) %></p>
+
+  <%= link_to restaurant_path(@restaurant.id),
+        method: :delete,
+        data: { confirm: "Are you sure?" } do %> <i class="fas fa-dumpster-fire"></i> <% end %>
+
+  <p><%= link_to 'back to list', restaurants_path %></p>
+</div>
